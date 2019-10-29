@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 	"strings"
+	"t/colour"
 	"t/utils"
 )
 
@@ -27,7 +28,7 @@ func AddItem(input []string) {
 	tasks = append(tasks, task)
 
 	if utils.WriteTasks("./.todo", tasks) {
-		fmt.Println("\033[1;35mTask added\033[0m")
+		fmt.Println(colour.BoldGreen("Task added"))
 	}
 
 }

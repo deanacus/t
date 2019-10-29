@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 	"strconv"
+	"t/colour"
 	"t/utils"
 )
 
@@ -13,7 +14,7 @@ import (
 func DeleteItem(input []string) {
 
 	if len(input) >= 2 {
-		fmt.Println("\033[31mToo many values supplied\033[0m")
+		fmt.Println(colour.BoldRed("Too many values supplied"))
 		return
 	}
 
@@ -26,7 +27,7 @@ func DeleteItem(input []string) {
 
 	// Check that the task exists
 	if len(tasks) < int(taskID) {
-		fmt.Println("\033[31mTask does not exist\033[0m")
+		fmt.Println(colour.BoldRed("Task does not exist"))
 		return
 	}
 
@@ -39,7 +40,7 @@ func DeleteItem(input []string) {
 	success := utils.WriteTasks("./.todo", newTasks)
 
 	if success {
-		fmt.Println("\033[31mTask has been yeeted\033[0m")
+		fmt.Println(colour.BoldGreen("Task has been yeeted"))
 	}
 
 }

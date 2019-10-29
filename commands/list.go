@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 	"strconv"
+	"t/colour"
 	"t/utils"
 )
 
@@ -17,15 +18,15 @@ func ListItems() {
 
 	newLine := "\n"
 
-	fmt.Println(newLine + "\033[1;34m# TODO\033[0m" + newLine)
+	fmt.Println(newLine + colour.BoldBlue("# TODO") + newLine)
 
 	if length > 0 {
 		for i, task := range tasks {
 			id := strconv.Itoa(i+1) + "."
-			fmt.Println("\033[2m"+id+"\033[0m", task)
+			fmt.Println(colour.Faint(id), task)
 		}
 	} else {
-		fmt.Println("Nothing to do")
+		fmt.Println(colour.BoldGreen("Nothing to do"))
 	}
 
 }

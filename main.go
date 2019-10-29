@@ -5,10 +5,11 @@ import (
 	"os"
 	"strings"
 
+	"t/colour"
 	"t/commands"
 )
 
-const versionString string = "0.0.1"
+var versionString string = colour.Blue("0.0.1")
 
 const helpString string = `t - The minimalist command line todo manager
 
