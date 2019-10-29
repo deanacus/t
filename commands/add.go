@@ -14,10 +14,6 @@ func AddItem(input []string) {
 
 	tasks := utils.CheckFile("./.todo")
 
-	for _, i := range tasks {
-		fmt.Println("old task", i)
-	}
-
 	task := strings.Join(input, " ")
 
 	// Check that the task doesn't already exist
@@ -31,7 +27,7 @@ func AddItem(input []string) {
 	tasks = append(tasks, task)
 
 	if utils.WriteTasks("./.todo", tasks) {
-		fmt.Println("Task added")
+		fmt.Println("\033[1;35mTask added\033[0m")
 	}
 
 }

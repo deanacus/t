@@ -13,7 +13,7 @@ import (
 func DeleteItem(input []string) {
 
 	if len(input) >= 2 {
-		fmt.Println("Too many values supplied")
+		fmt.Println("\033[31mToo many values supplied\033[0m")
 		return
 	}
 
@@ -26,7 +26,7 @@ func DeleteItem(input []string) {
 
 	// Check that the task exists
 	if len(tasks) < int(taskID) {
-		fmt.Println("Task does not exist")
+		fmt.Println("\033[31mTask does not exist\033[0m")
 		return
 	}
 
@@ -39,7 +39,7 @@ func DeleteItem(input []string) {
 	success := utils.WriteTasks("./.todo", newTasks)
 
 	if success {
-		fmt.Println("Task has been yeeted")
+		fmt.Println("\033[31mTask has been yeeted\033[0m")
 	}
 
 }
