@@ -4,19 +4,20 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"t/commands"
 )
 
-const VERSION string = "0.0.1"
+const versionString string = "0.0.1"
 
-const HELP string = `t - The minimalist command line todo manager
+const helpString string = `t - The minimalist command line todo manager
 
 Usage: t [option] <Input>
 
 Options:
+  -l, --list                    List the tasks in the todo list
   -a, --add <Task>              Add a task to the todo list
-  -c, --complete <TaskID>       Move a task to the completed list
   -d, --delete <TaskID>         Delete a task from the todo list
-  -e, --edit <TaskID> <Task>    Edit a task in the todo list
   -v, --version                 Show the version
   -h, --help                    Show this help information`
 
@@ -25,48 +26,29 @@ func main() {
 		os.Args = append(os.Args, "l")
 	}
 
+	var input = os.Args[2:]
+
 	var flag string = strings.TrimPrefix(os.Args[1], "-")
+
 	switch flag {
-		case "h":
-			showHelp()
-		case "l":
-			listItems()
-		case "a":
-			addItem()
-		case "d":
-			deleteItem()
-		case "v":
-			showVersion()
+	case "l":
+		commands.ListItems()
+	case "a":
+		commands.AddItem(input)
+	case "d":
+		commands.DeleteItem(input)
+	case "h":
+		showHelp()
+	case "v":
+		showVersion()
 	}
-
-	readfile()
-
-}
-
-func listItems() {
-
-	fmt.Println("list the stuff")
-
-}
-
-func addItem() {
-
-	fmt.Println("add the stuff")
-
-}
-
-func deleteItem() {
-
-	fmt.Println("delete the stuff")
 
 }
 
 func showHelp() {
-
-	fmt.Println(HELP)
-
+	fmt.Println(helpString)
 }
 
 func showVersion() {
-	fmt.Println("Version:", VERSION)
+	fmt.Println("Version:", versionString)
 }
