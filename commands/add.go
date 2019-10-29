@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"os"
 	"strings"
 	"t/colour"
 	"t/utils"
@@ -13,7 +14,8 @@ import (
 // resulting slice to the configured file.
 func AddItem(input []string) {
 
-	tasks := utils.CheckFile("./.todo")
+	home, _ := os.UserHomeDir()
+	tasks := utils.ReadTasks(home + "/.t/todo.txt")
 
 	task := strings.Join(input, " ")
 
@@ -27,7 +29,7 @@ func AddItem(input []string) {
 	// Add the task to the end of the slice
 	tasks = append(tasks, task)
 
-	if utils.WriteTasks("./.todo", tasks) {
+	if utils.WriteTasks(home+"/.t/todo.txt", tasks) {
 		fmt.Println(colour.BoldGreen("Task added"))
 	}
 

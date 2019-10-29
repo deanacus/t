@@ -31,9 +31,9 @@ func handleMissingFile(filePath string) bool {
 	return false
 }
 
-// CheckFile Tries to open a file for reading, and returns each line
+// ReadTasks Tries to open a file for reading, and returns each line
 // as a value in a slice, or asks the use to create the file
-func CheckFile(filePath string) []string {
+func ReadTasks(filePath string) []string {
 	file, err := os.Open(filePath)
 	defer file.Close()
 

@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 	"t/colour"
 	"t/utils"
@@ -23,7 +24,8 @@ func DeleteItem(input []string) {
 	taskID, _ := strconv.ParseInt(input[0], 10, 0)
 
 	// Read file into array/slice
-	tasks := utils.CheckFile("./.todo")
+	home, _ := os.UserHomeDir()
+	tasks := utils.ReadTasks(home + "/.t/todo.txt")
 
 	// Check that the task exists
 	if len(tasks) < int(taskID) {
@@ -37,7 +39,7 @@ func DeleteItem(input []string) {
 	})
 
 	// Write the slice back to the file
-	success := utils.WriteTasks("./.todo", newTasks)
+	success := utils.WriteTasks(home+"/.t/todo.txt", newTasks)
 
 	if success {
 		fmt.Println(colour.BoldGreen("Task has been yeeted"))
