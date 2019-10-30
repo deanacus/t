@@ -20,8 +20,11 @@ Features:
 
 ## Installation
 
-Clone the repo to your `$GOPATH`, then you can choose between running the app
-from source or compiling the binary
+There's a number of ways you can get t:
+
+#### Download the binary
+
+Download the binary from the latest [release][binary]
 
 #### Run from source
 
@@ -57,3 +60,4 @@ submitting pull requests.
 SemVer all the things
 
 [cont]: https://github.com/deanacus/t/tree/master/CONTRIBUTING.md
+[binary]: https://github.com/deanacus/t/releases/latest
