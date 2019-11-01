@@ -2,9 +2,9 @@ package commands
 
 import (
 	"fmt"
-	"os"
 	"strconv"
 	"t/colour"
+	"t/config"
 	"t/utils"
 )
 
@@ -13,9 +13,7 @@ import (
 // # TODO
 func ListItems() {
 
-	home, _ := os.UserHomeDir()
-
-	tasks := utils.ReadTasks(home + "/.t/todo.txt")
+	tasks := utils.ReadTasks(config.DefaultConfig.FilePath)
 
 	length := len(tasks)
 

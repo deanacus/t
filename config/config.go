@@ -3,41 +3,44 @@ package config
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
+	"strings"
 )
 
 // Config is the main config shape for our app
 type Config struct {
-	tFilePath string
+	Path     string
+	FileName string
+	FilePath string
+}
+
+// DefaultConfig is our config instance used in the app
+var DefaultConfig = Config{
+	Path:     home + "/.t/",
+	FileName: "todo.txt",
 }
 
 var home, _ = os.UserHomeDir()
 
-// DetectConfig will check for the existance of a config
+// InitialiseConfig will check for the existance of a config
 // file in the users home directory and override the values
 // on the defaultConfig variable if one is found
-func DetectConfig() {
+func InitialiseConfig() {
 	// file, err := os.Open(home + ".t.yml")
 	file, err := os.Open(".t.json")
-	// file, err := os.Open(home + ".trc")
-	// defer file.Close()
-
-	jsn, _ := ioutil.ReadFile(".t.json")
-	s := string(jsn)
-	fmt.Println(s)
-
-	// defaultConfig := Config{tFilePath: home + "/.todo"}
-	newConfig := Config{tFilePath: "o"}
-
-	if err != nil {
-		fmt.Println("no config file found")
-	}
+	defer file.Close()
 
 	decoder := json.NewDecoder(file)
-	err = decoder.Decode(&newConfig)
+	err = decoder.Decode(&DefaultConfig)
 
-	fmt.Println(&newConfig)
+	if err != nil {
+		fmt.Println("Error loading config file")
+		os.Exit(2)
+	}
 
-	// return defaultConfig
+	if DefaultConfig.Path[1] == 47 {
+		DefaultConfig.Path = strings.Replace(DefaultConfig.Path, "~", home, -1)
+	}
+
+	DefaultConfig.FilePath = DefaultConfig.Path + DefaultConfig.FileName
 }
