@@ -2,7 +2,6 @@ package config
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"strings"
 )
@@ -31,16 +30,13 @@ func InitialiseConfig() {
 	defer file.Close()
 
 	decoder := json.NewDecoder(file)
-	err = decoder.Decode(&DefaultConfig)
+	if err == nil {
+		err = decoder.Decode(&DefaultConfig)
 
-	if err != nil {
-		fmt.Println("Error loading config file")
-		os.Exit(2)
+		if DefaultConfig.Path[1] == 47 {
+			DefaultConfig.Path = strings.Replace(DefaultConfig.Path, "~", home, -1)
+		}
+
+		DefaultConfig.FilePath = DefaultConfig.Path + DefaultConfig.FileName
 	}
-
-	if DefaultConfig.Path[1] == 47 {
-		DefaultConfig.Path = strings.Replace(DefaultConfig.Path, "~", home, -1)
-	}
-
-	DefaultConfig.FilePath = DefaultConfig.Path + DefaultConfig.FileName
 }
