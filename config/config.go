@@ -27,7 +27,7 @@ var DefaultConfig = Config{
 // file in the users home directory and override the values
 // on the defaultConfig variable if one is found
 func InitialiseConfig() {
-	file, err := os.Open(home + ".t.json")
+	file, err := os.Open(home + "/.t.json")
 	defer file.Close()
 
 	decoder := json.NewDecoder(file)
