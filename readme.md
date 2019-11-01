@@ -10,8 +10,8 @@ Features:
 - [x] Add todo items  
 - [x] Delete todo items  
 - [x] Save todo items in a file  
-- [ ] Configure using a config file  
-- [ ] Have a default config  
+- [x] Configure using a config file  
+- [x] Have a default config  
 - [x] Colourise output
 
 ## Prerequisites

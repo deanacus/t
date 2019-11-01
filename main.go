@@ -7,6 +7,7 @@ import (
 
 	"t/colour"
 	"t/commands"
+	"t/config"
 )
 
 var versionString string = colour.Blue("0.0.1")
@@ -23,6 +24,8 @@ Options:
   -h, --help                    Show this help information`
 
 func main() {
+	config.InitialiseConfig()
+
 	if len(os.Args) <= 1 {
 		os.Args = append(os.Args, "l")
 	}
@@ -31,19 +34,21 @@ func main() {
 
 	var flag string = strings.TrimPrefix(os.Args[1], "-")
 
+	// Just to trim for long form flags
+	flag = strings.TrimPrefix(flag, "-")
+
 	switch flag {
-	case "l":
+	case "l", "list":
 		commands.ListItems()
-	case "a":
+	case "a", "add":
 		commands.AddItem(input)
-	case "d":
+	case "d", "delete":
 		commands.DeleteItem(input)
-	case "h":
+	case "h", "help":
 		showHelp()
-	case "v":
+	case "v", "version":
 		showVersion()
 	}
-
 }
 
 func showHelp() {
